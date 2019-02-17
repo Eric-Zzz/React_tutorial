@@ -24,3 +24,13 @@ return React.createElement('div', {className: 'shopping-list'},
 
 //test3
 //newtest
+
+class Square extends React.Component {
+    render() {
+        return (
+            <button className="square" onClick={function() { alert('click'); }}>
+                {this.props.value}
+            </button>
+        );
+    }
+}
