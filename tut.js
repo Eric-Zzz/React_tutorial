@@ -20,10 +20,7 @@ return React.createElement('div', {className: 'shopping-list'},
   React.createElement('ul', /* ... ul children ... */)
 );
 
-
-
-//test3
-//newtest
+//18/2/19 test
 
 class Square extends React.Component {
     render() {
@@ -34,3 +31,7 @@ class Square extends React.Component {
         );
     }
 }
+
+
+
+<html></html>
