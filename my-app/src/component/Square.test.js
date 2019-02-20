@@ -1,5 +1,4 @@
-import React from 'react'
-import Enzyme from './Enzyme.config';
+import React from 'react';
 import Square from './Square';
 import { shallow } from 'enzyme';
 
