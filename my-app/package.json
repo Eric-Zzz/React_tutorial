@@ -25,5 +25,8 @@
     "not op_mini all"
   ],
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "react-test-renderer": "^16.8.2"
+  }
 }

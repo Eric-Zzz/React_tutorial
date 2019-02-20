@@ -1,8 +1,7 @@
 import React from 'react'
 import Enzyme from './Enzyme.config';
-import Square from '../component/Square';
-
-const {shallow}=Enzyme;
+import Square from './Square';
+import { shallow } from 'enzyme';
 
 describe('There are some components', function () {
     //setup
@@ -10,12 +9,11 @@ describe('There are some components', function () {
 
     it('square component', function () {
         //action
-        expect(wrapper.find('button')).toExist();
+        // expect(wrapper.find('button').length).toEqual(1);
+        // expect(wrapper.find('button').exists()).toBeTruthy();
+        expect(wrapper.exists('button')).toBeTruthy();
         //assertion
     });
-    it('p component', function () {
-        expect(wrapper.find('p')).toExist();
-    })
 });
 
 
