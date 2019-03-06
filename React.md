@@ -1,8 +1,8 @@
-#React 知识总结
-###个人总结要点
+# React 知识总结
+### 个人总结要点
 react难点：组件怎么拆分？ 单一原则，只干一件事，功能简单，不复用不拆，考虑迭代 
 
-####数据
+#### 数据
 
 - props：数据传递 
 - state：私有状态（用户输入、默认属性） 
@@ -11,7 +11,7 @@ react难点：组件怎么拆分？ 单一原则，只干一件事，功能简�
 - setState：在原来的基础上进行合并，异步，解决：this.setState（function（prevState，props）｛｝） 
 - 钩子（获取默认属性）：getDefaultProps、getInitialState
 
-####Tips
+#### Tips
 1. react 一旦会复用，就做成组件 
 2. 尽量用无状态组件（不能访问this对象，只能访问props，纯函数，无需实例化，性能高） 
 3. 传值思路 
@@ -33,7 +33,7 @@ JSX 用来声明 React 当中的元素。
 ```
 ---
 
-####JSX 属性
+#### JSX 属性
 可以使用引号来定义以字符串为值的属性。
 ```
     const element = <div tabIndex="0"></div>;
@@ -43,7 +43,7 @@ JSX 用来声明 React 当中的元素。
     const element = <img src={user.avatarUrl} />;
 ```
 ---
-####JSX 嵌套
+#### JSX 嵌套
 JSX 标签同样可以相互嵌套。
 如果 JSX 标签是闭合式的，那么你需要在结尾处用 />, 就好像 XML/HTML 一样.
 ```
