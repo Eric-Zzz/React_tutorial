@@ -50,23 +50,23 @@ JSX 标签同样可以相互嵌套。
     const element = <img src={user.avatarUrl} />;
 ```
 ---
-####警告:
+#### 警告:
 因为 JSX 的特性更接近 JavaScript 而不是 HTML , 所以 React DOM 使用 camelCase 小驼峰命名 来定义属性的名称，而不是使用 HTML 的属性名称。
 
 例如，class 变成了 className，而 tabindex 则对应着 tabIndex。
 
 ----
-###元素渲染
+### 元素渲染
 React 只会更新必要的部分
 React DOM 首先会比较元素内容先后的不同，而在渲染过程中只会更新改变了的部分。
 ----
-###组件 & Props
+### 组件 & Props
 组件可以将UI切分成一些独立的、可复用的部件，这样你就只需专注于构建每一个单独的部件。
 
 组件从概念上看就像是函数，它可以接收任意的输入值（称之为“props”），并返回一个需要在页面上展示的React元素。
 
 ---
-####函数定义/类定义组件
+#### 函数定义/类定义组件
 定义一个组件最简单的方式是使用JavaScript函数：
 ```
 function Welcome(props) {
@@ -81,7 +81,7 @@ class Welcome extends React.Component {
 }
 ```
 ---
-####警告:
+#### 警告:
 
 组件名称必须以大写字母开头。
 
@@ -90,7 +90,7 @@ class Welcome extends React.Component {
 组件的返回值只能有一个根元素。这也是我们要用一个\<div>来包裹所有\<Welcome />元素的原因。
 
 ----
-####Props的只读性
+#### Props的只读性
 无论是使用函数或是类来声明一个组件，它决不能修改它自己的props。
 纯函数（不改变数据）：
 ```
@@ -107,13 +107,13 @@ function withdraw(account, amount) {
 **所有的React组件必须像纯函数那样使用它们的props。**
 
 ---
-###State & 生命周期
+### State & 生命周期
 状态与属性十分相似，但是状态是私有的，完全受控于当前组件。
 
 我们之前提到过，定义为类的组件有一些额外的特性。局部状态就是如此：只能用于类的一个功能。
 
 ---
-####将函数转换为类 为一个类添加局部状态
+#### 将函数转换为类 为一个类添加局部状态
 ```$xslt
 class Clock extends React.Component {
   constructor(props) {
@@ -136,9 +136,9 @@ render()必须有。
 类组件应始终使用props调用基础构造函数。
 
 ---
-####将生命周期方法添加到类中
+#### 将生命周期方法添加到类中
 ![生命周期](生命周期.jpg )
-#####初始化:
+##### 初始化:
 ```
 getDefaultProps()
 ```
@@ -159,7 +159,7 @@ react最重要的步骤，创建虚拟dom，进行diff算法，更新dom树都�
 componentDidMount()
 ```
 组件渲染之后调用，只调用一次。
-#####更新:
+##### 更新:
 ```$xslt
 componentWillReceiveProps(nextProps)
 ```
@@ -181,16 +181,16 @@ componentDidUpdate()
 ```
 组件初始化时不调用，组件更新完成后调用，此时可以获取dom节点。
 
-#####卸载:
+##### 卸载:
 ```$xslt
 componentWillUnmount()
 ```
 组件将要卸载时调用，一些事件监听和定时器需要在此时清除。
 
 ----
-###正确地使用状态
+### 正确地使用状态
 关于 setState() 这里有三件事情需要知道
-####不要直接更新状态
+#### 不要直接更新状态
 ```$xslt
 // Wrong
 this.state.comment = 'Hello';
@@ -201,7 +201,7 @@ this.state.comment = 'Hello';
 this.setState({comment: 'Hello'});
 ```
 构造函数是唯一能够初始化 this.state 的地方。
-####状态更新可能是异步的
+#### 状态更新可能是异步的
 React 可以将多个setState() 调用合并成一个调用来提高性能。
 
 因为 this.props 和 this.state 可能是异步更新的，你不应该依靠它们的值来计算下一个状态。
@@ -227,7 +227,7 @@ this.setState(function(prevState, props) {
   };
 });
 ```
-####状态更新合并
+#### 状态更新合并
 当你调用 setState() 时，React 将你提供的对象合并到当前状态。
 
 例如，你的状态可能包含一些独立的变量：
@@ -259,7 +259,7 @@ componentDidMount() {
 这里的合并是浅合并，也就是说this.setState({comments})完整保留了this.state.posts，但完全替换了this.state.comments。
 
 ----
-###数据自顶向下流动
+### 数据自顶向下流动
 父组件或子组件都不能知道某个组件是有状态还是无状态，并且它们不应该关心某组件是被定义为一个函数还是一个类。
 
 这就是为什么状态通常被称为局部或封装。 除了拥有并设置它的组件外，其它组件不可访问。
@@ -283,7 +283,7 @@ function FormattedDate(props) {
 如果你想象一个组件树作为属性的瀑布，每个组件的状态就像一个额外的水源，它连接在一个任意点，但也流下来。
 
 ---
-###事件处理
+### 事件处理
 React 元素的事件处理和 DOM元素的很相似。但是有一点语法上的不同:
 
 1. React事件绑定属性的命名采用驼峰式写法，而不是小写。
@@ -399,7 +399,7 @@ class LoggingButton extends React.Component {
 使用这个语法有个问题就是每次 LoggingButton 渲染的时候都会创建一个不同的回调函数。在大多数情况下，这没有问题。然而如果这个回调函数作为一个属性值传入低阶组件，这些组件可能会进行额外的重新渲染。我们通常建议在构造函数中绑定或使用属性初始化器语法来避免这类性能问题。
 
 ---
-###向事件处理程序传递参数
+### 向事件处理程序传递参数
 
 通常我们会为事件处理程序传递额外的参数。例如，若是 id 是你要删除那一行的 id，以下两种方式都可以向事件处理程序传递参数：
 ```
@@ -435,7 +435,7 @@ class Popper extends React.Component{
 }
 ```
 ----
-###条件渲染
+### 条件渲染
 在 React 中，你可以创建不同的组件来封装各种你需要的行为。然后还可以根据应用的状态变化只渲染其中的一部分。
 
 React 中的条件渲染和 JavaScript 中的一致，使用 JavaScript 操作符 if 或条件运算符来创建表示当前状态的元素，然后让 React 根据它们来更新 UI。
@@ -470,7 +470,7 @@ ReactDOM.render(
 
 ---
 
-###元素变量
+### 元素变量
 
 你可以使用变量来储存元素。它可以帮助你有条件的渲染组件的一部分，而输出的其他部分不会更改。
 
@@ -541,7 +541,7 @@ ReactDOM.render(
 声明变量并使用 if 语句是条件渲染组件的不错的方式，但有时你也想使用更简洁的语法，在 JSX 中有如下几种方法。
 
 
-###与运算符 &&
+### 与运算符 &&
 你可以通过用花括号包裹代码在 JSX 中嵌入任何表达式 ，也包括 JavaScript 的逻辑与 &&，它可以方便地条件渲染一个元素。
 
 ```$xslt
@@ -570,7 +570,7 @@ ReactDOM.render(
 因此，如果条件是 true，&& 右侧的元素就会被渲染，如果是 false，React 会忽略并跳过它。
 
 ---
-###三目运算符
+### 三目运算符
 条件渲染的另一种方法是使用 JavaScript 的条件运算符 condition ? true : false。
 
 在下面的例子中，我们用它来有条件的渲染一小段文本。
@@ -602,7 +602,7 @@ render() {
 ```
 
 ---
-###阻止组件渲染
+### 阻止组件渲染
 在极少数情况下，你可能希望隐藏组件，即使它被其他组件渲染。让 render 方法返回 null 而不是它的渲染结果即可实现。
 
 在下面的例子中，\<WarningBanner /> 根据属性 warn 的值条件渲染。如果 warn 的值是 false，则组件不会渲染：
@@ -652,7 +652,7 @@ ReactDOM.render(
 组件的 render 方法返回 null 并不会影响该组件生命周期方法的回调。例如，componentWillUpdate 和 componentDidUpdate 依然可以被调用。
 
 ---
-###列表 & Keys
+### 列表 & Keys
 
 如下代码，我们使用map()函数让数组中的每一项翻倍,我们得到了一个新的数列doubled
 ```$xslt
@@ -666,7 +666,7 @@ console.log(doubled);
 在React中，把数组转化为数列元素的过程是相似的
 
 ---
-###渲染多个组件
+### 渲染多个组件
 
 你可以通过使用{}在JSX内构建一个元素集合
 
@@ -691,7 +691,7 @@ ReactDOM.render(
 这段代码生成了一个1到5的数字列表
 
 ---
-####基础列表组件
+#### 基础列表组件
 通常你需要渲染一个列表到组件中
 
 我们可以把前面的例子重构成一个组件。这个组件接收numbers数组作为参数，输出一个无序列表。
@@ -736,7 +736,7 @@ ReactDOM.render(
 ```
 
 ---
-####Keys
+#### Keys
 Keys可以在DOM中的某些元素被增加或删除的时候帮助React识别哪些元素发生了变化。因此你应当给数组中的每一个元素赋予一个确定的标识。
 ```$xslt
 const numbers = [1, 2, 3, 4, 5];
@@ -767,7 +767,7 @@ const todoItems = todos.map((todo, index) =>
 
 ---
 
-####用keys提取组件
+#### 用keys提取组件
 
 元素的key只有放在其环绕数组的上下文中才有意义。
 
@@ -836,7 +836,7 @@ ReactDOM.render(
 
 ---
 
-####键（key）只是在兄弟之间必须唯一
+#### 键（key）只是在兄弟之间必须唯一
 数组元素中使用的key在其兄弟之间应该是独一无二的。然而，它们不需要是全局唯一的。当我们生成两个不同的数组时，我们可以使用相同的键
 
 ```$xslt
@@ -888,8 +888,8 @@ const content = posts.map((post) =>
 上面例子中，Post组件可以读出props.id，但是不能读出props.key
 
 ---
-
-####在jsx中嵌入map()
+ 
+#### 在jsx中嵌入map()
 
 在上面的例子中，我们声明了一个单独的listItems变量并将其包含在JSX中
 
@@ -930,7 +930,7 @@ function NumberList(props) {
 
 ----
 
-###表单
+### 表单
 
 HTML表单元素与React中的其他DOM元素有所不同,因为表单元素生来就保留一些内部状态。例如，下面这个表单只接受一个唯一的name。
 
@@ -948,7 +948,7 @@ HTML表单元素与React中的其他DOM元素有所不同,因为表单元素生�
 
 ---
 
-####受控组件
+#### 受控组件
 
 在HTML当中，像\<input>,\<textarea>, 和 \<select>这类表单元素会维持自身状态，并根据用户输入进行更新。但在React中，可变的状态通常保存在组件的状态属性中，并且只能用 setState() 方法进行更新。
 
@@ -994,7 +994,7 @@ class NameForm extends React.Component {
 使用”受控组件”,每个状态的改变都有一个与之相关的处理函数。这样就可以直接修改或验证用户输入。例如，我们如果想限制输入全部是大写字母，我们可以将handleChange 写为如下：
 
 ---
-####textarea 标签
+#### textarea 标签
 
 在HTML当中，\<textarea> 元素通过子节点来定义它的文本内容
 
@@ -1042,7 +1042,7 @@ class EssayForm extends React.Component {
 注意this.state.value是在构造函数中初始化，这样文本区域就能获取到其中的文本。
 
 ----
-####select 标签
+#### select 标签
 
 在HTML当中，\<select>会创建一个下拉列表。例如这个HTML就创建了一个下拉列表的原型。
 ```$xslt
@@ -1095,7 +1095,7 @@ class FlavorForm extends React.Component {
 ```
 
 ---
-####file input 标签
+#### file input 标签
 
 在HTML当中，\<input type="file"> 允许用户从他们的存储设备中选择一个或多个文件以提交表单的方式上传到服务器上, 或者通过 Javascript 的 File API 对文件进行操作 
 
@@ -1105,7 +1105,7 @@ class FlavorForm extends React.Component {
 由于该标签的 value 属性是只读的， 所以它是 React 中的一个非受控组件
 
 ---
-####多个输入的解决方法
+#### 多个输入的解决方法
 当你有处理多个受控的input元素时，你可以通过给每个元素添加一个name属性，来让处理函数根据 event.target.name的值来选择做什么。
 
 ```$xslt
@@ -1167,12 +1167,12 @@ this.setState({
 同样由于 setState() 自动将部分状态合并到当前状态，因此我们只需要使用发生变化的部分调用它。
 
 ---
-####受控组件的替代方法
+#### 受控组件的替代方法
 有时使用受控组件可能很繁琐，因为您要为数据可能发生变化的每一种方式都编写一个事件处理程序，并通过一个组件来管理全部的状态。当您将预先存在的代码库转换为React或将React应用程序与非React库集成时，这可能变得特别烦人。在以上情况下，你或许应该看看非受控组件，这是一种表单的替代技术。
 
 ----
 
-###状态提升
+### 状态提升
 使用 react 经常会遇到几个组件需要共用状态数据的情况。这种情况下，我们最好将这部分共享的状态提升至他们最近的父组件当中进行管理。我们来看一下具体如何操作吧。
 
 
@@ -1224,7 +1224,7 @@ class Calculator extends React.Component {
 ```
 
 ---
-####添加第二个输入框
+#### 添加第二个输入框
 
 现在我们有了一个新的需求，在提供摄氏度输入的基础之上，再提供一个华氏温度输入，并且它们能保持同步。
 
@@ -1280,7 +1280,7 @@ class Calculator extends React.Component {
 另外，我们此时也不能从 Calculator 组件中展示 BoilingVerdict 的渲染结果。因为现在表示温度的状态数据只存在于 TemperatureInput 组件当中
 
 ---
-####写出转换函数
+#### 写出转换函数
 首先，我们写两个可以将摄氏度和华氏度互相转换的函数。
 
 ```$xslt
@@ -1311,7 +1311,7 @@ function tryConvert(temperature, convert) {
 举两个例子，tryConvert('abc', toCelsius) 会返回空字符串，而 tryConvert('10.22', toFahrenheit) 会返回 '50.396'。
 
 ---
-###状态提升
+### 状态提升
 
 到这一步为止，两个TemperatureInput组件都是在自己的 state 中独立保存数据。
 ```$xslt
@@ -1466,7 +1466,7 @@ class Calculator extends React.Component {
 一切更新都是经过同样的步骤，因而输入框能保持同步的。
 
 ---
-####经验教训
+#### 经验教训
 
 在React应用中，对应任何可变数据理应只有一个单一“数据源”。通常，状态都是首先添加在需要渲染数据的组件中。然后，如果另一个组件也需要这些数据，你可以将数据提升至离它们最近的共同祖先中。你应该依赖 自上而下的数据流，而不是尝试在不同组件中同步状态。
 
@@ -1477,11 +1477,11 @@ class Calculator extends React.Component {
 当你在开发UI界面遇到问题时，你可以使用 React 开发者工具来检查props属性，并且可以点击查看组件树，直到你找到负责目前状态更新的组件。这能让你到追踪到产生 bug 的源头。
 
 ---
-###组合 vs 继承
+### 组合 vs 继承
 React 具有强大的组合模型，我们建议使用组合而不是继承来复用组件之间的代码。
 
 ---
-####包含关系
+#### 包含关系
 一些组件不能提前知道它们的子组件是什么。这对于 Sidebar 或 Dialog 这类通用容器尤其常见。
 
 我们建议这些组件使用 children 属性将子元素直接传递到输出。
@@ -1543,7 +1543,7 @@ function App() {
 ```
 
 ---
-####特殊实例
+#### 特殊实例
 有时我们认为组件是其他组件的特殊实例。例如，我们会说 WelcomeDialog 是 Dialog 的特殊实例。
 
 在 React 中，这也是通过组合来实现的，通过配置属性用较特殊的组件来渲染较通用的组件。
